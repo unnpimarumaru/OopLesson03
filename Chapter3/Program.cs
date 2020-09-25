@@ -12,24 +12,27 @@ namespace Chapter3
     {
         static void Main(string[] args)
         {
-            var names = new List<string>
-            {
+            var numbers = new List<int> { 12, 87, 94, 14, 53, 20, 40, 35, 76, 91, 31, 17, 48 };
 
-            "Tokyo","New Delhi","Bankoku","London","Paris","Berlin","Canberra","Hong Kong",
-            };
-            //即時
-            var  query = names.Where(s => s.Length <= 5).ToList();
-            foreach (var item in query)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("-----------------");
+            //3-1
+            //var exists = numbers.Exists(s => s %8 == 0 || s %9 == 0 );
+            //Console.WriteLine(exists);
 
-            names[0] = "Osaka";
-            foreach (var item in query)
-            {
-                Console.WriteLine(item);
-            }
+            //3-2
+            //numbers.ForEach(s => Console.WriteLine(s/2.0));
+
+            //3-3
+            //var num = numbers.Where(s => s >= 50);
+            //
+            //foreach (var s in num)
+            //{
+            //    Console.WriteLine(s);
+            //}
+
+
+            //3-4
+
+           // List<int> list = numbers.(s=> s*2);
         }
 
     }
