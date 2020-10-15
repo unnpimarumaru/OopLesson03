@@ -18,10 +18,10 @@ namespace Chapter6
             foreach (var str in strings)
             {
                 Console.Write(str + " ");
-                
+
             }
             Console.WriteLine();//改行
-            var sortedNumber = numbers.OrderBy(n=>n);
+            var sortedNumber = numbers.OrderBy(n => n);
             foreach (var nums in sortedNumber)
             {
                 Console.Write(nums + " ");
@@ -58,7 +58,7 @@ namespace Chapter6
                 Console.WriteLine(number + " ");
             }
 
-            var strNum = numbers.Select(n=> n.ToString());
+            var strNum = numbers.Select(n => n.ToString());
             foreach (var strnum in strNum)
             {
                 Console.Write(strnum + " ");
@@ -70,14 +70,14 @@ namespace Chapter6
                 Console.Write(item + " ");
             }
             Console.WriteLine();
-            Console.WriteLine( numbers.Distinct().Count(n => n > 10));
-            
+            Console.WriteLine(numbers.Distinct().Count(n => n > 10));
+
             {
-              
+
             }
 
             var bookss = new List<Book> {
-   new Book { Title = "C#プログラミングの新常識", Price = 3800, Pages = 378 },
+   new Book { Title = "C#プログラミングの新常識「c#」", Price = 3800, Pages = 378 },
    new Book { Title = "ラムダ式とLINQの極意", Price = 2500, Pages = 312 },
    new Book { Title = "ワンダフル・C#ライフ", Price = 2900, Pages = 385 },
    new Book { Title = "一人で学ぶ並列処理プログラミング", Price = 4800, Pages = 464 },
@@ -85,36 +85,53 @@ namespace Chapter6
    new Book { Title = "私でも分かったASP.NET MVC", Price = 3200, Pages = 453 },
    new Book { Title = "楽しいC#プログラミング教室", Price = 2540, Pages = 348 },
 };
+            //全ての書籍から「C#」の文字がいくつあるのかカウントする
+
+            int count = 0;
+
+            foreach (var bookkk in books.Where(b => b.Title.Contains("C#")))
+            {
+                for (int i = 0; i < bookkk.Title.Length - 1; i++)
+                {
+                    if ((bookkk.Title[i] == 'c') && (bookkk.Title[i + 1] == '#'))
+                    {
+                        count++;
+                    }
+                }
+            }
+                    Console.WriteLine($"文字列「C#」の個数は{count}です。");
+
             //6-1
-            var book = bookss.Where(n => n.Title== "ワンダフル・C#ライフ");
-            foreach (var booksss in book)
-            {
-                Console.WriteLine($"{booksss.Title} {booksss.Price}円 　P{booksss.Pages}");
-            }
+            var book = bookss.Where(n => n.Title == "ワンダフル・C#ライフ");
+                foreach (var booksss in book)
+                {
+                    Console.WriteLine($"{booksss.Title} {booksss.Price}円 　P{booksss.Pages}");
+                }
 
-            //6-2
-            Console.WriteLine(bookss.Count(x=> x.Title.Contains("C#")));
-            //6-3
-            Console.WriteLine(bookss.Where(x => x.Title.Contains("C#")).Average(x=> x.Pages));
+                //6-2
+                Console.WriteLine(bookss.Count(x => x.Title.Contains("C#")));
+                //6-3
+                Console.WriteLine(bookss.Where(x => x.Title.Contains("C#")).Average(x => x.Pages));
 
-            //6-4
-            Console.WriteLine(bookss.FirstOrDefault(x => x.Price >= 4000 ).Title);
+                //6-4
+                Console.WriteLine(bookss.FirstOrDefault(x => x.Price >= 4000).Title);
 
-            //6-5
-            Console.WriteLine(bookss.Where(x => x.Price < 4000).Max(x=> x.Pages));
+                //6-5
+                Console.WriteLine(bookss.Where(x => x.Price < 4000).Max(x => x.Pages));
 
-            //6-6
-          
-            foreach (var item in bookss.Where(x => x.Pages >= 400).OrderByDescending(x=> x.Price))
-            {
-                Console.WriteLine(item.Title+" "+item.Price);
-            }
+                //6-6
 
-            //6-7
-            foreach (var item in bookss.Where(x => x.Title.Contains("C#") && x.Pages <= 500))
-            {
-                Console.WriteLine(item.Title);
-            }
+                foreach (var item in bookss.Where(x => x.Pages >= 400).OrderByDescending(x => x.Price))
+                {
+                    Console.WriteLine(item.Title + " " + item.Price);
+                }
+
+                //6-7
+                foreach (var item in bookss.Where(x => x.Title.Contains("C#") && x.Pages <= 500))
+                {
+                    Console.WriteLine(item.Title);
+                }
+            
         }
     }
 }
