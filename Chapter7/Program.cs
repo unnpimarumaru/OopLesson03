@@ -34,7 +34,7 @@ namespace Chapter7
             // ディクショナリに追加
             while (true)
             {
-                Console.WriteLine("1．登録　 2．内容を表示  3終了");
+                Console.WriteLine("1．登録　 2．内容を表示  3. 終了");
 
                 Console.Write(">");
                 var select = Console.ReadLine();
