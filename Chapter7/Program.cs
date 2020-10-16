@@ -2,6 +2,7 @@
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.ExceptionServices;
@@ -17,61 +18,41 @@ namespace Chapter7
 
         static void Main(string[] args)
         {
-            // *辞書登録プログラム *表示
-            #region
-            Console.WriteLine("**********************");
-            Console.WriteLine("* 辞書登録プログラム *");           
-            Console.WriteLine("**********************");
-            #endregion
+            var text = "Cozy lummox gives smart squid who asks for job pen";
+            Exercise1_1(text); //問題7.1.1
 
-            // ディクショナリの初期化
-            var dict = new Dictionary<string, List<string>>();
+        }
+        static void Exercise1_1(string text)
+        {
+            var dict = new SortedDictionary<char, int>();
 
-            // ディクショナリに追加
-            while (true)
+            foreach (var ch in text.ToUpper())
             {
-                Console.WriteLine("1．登録　 2．内容を表示  3. 終了");
-
-                Console.Write(">");
-                var select = Console.ReadLine();
-                if (select == "1")
-                { 
-
-                    Console.Write("keyを入力:");
-                    var key = Console.ReadLine();
-                    Console.Write("VALUEを入力:");
-                    var value = Console.ReadLine();
-
-                    if (dict.ContainsKey(key))
-                    {
-                        dict[key].Add(value);
-                    }
-                    else
-                    {
-                        dict[key] = new List<string> { value };
-                    }
-                    Console.WriteLine("登録しました");
-                }
-
-                // ディクショナリの内容を列挙
-                else if (select == "2")
+                if ('A' <= ch && ch <= 'Z')
                 {
-                    foreach (var item in dict)
+
+                    if (dict.ContainsKey(ch))
                     {
-                        foreach (var term in item.Value)
+                        //既に登録済み
+                        dict[ch]+=1;
+                    }
+                        //未登録
+                        else
                         {
-                            Console.WriteLine("{0} : {1}", item.Key, term);
+                        dict.Add(ch ,1);
                         }
-                    }
-                }
-                //終了
-                else if (select == "3")
-                {
-                    break;
                 }
             }
-           
-           
+
+            foreach (var item in dict)
+            {
+                Console.WriteLine($"{item.Key}:{item.Value}");
+            }
+
+
+
+
         }
+
     }
 }
