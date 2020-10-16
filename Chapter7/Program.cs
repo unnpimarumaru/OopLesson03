@@ -20,12 +20,8 @@ namespace Chapter7
             // *辞書登録プログラム *表示
             #region
             Console.WriteLine("**********************");
-            Console.Write("* ");
-            Console.Write("辞書登録プログラム");
-            Console.Write(" *");
-            Console.WriteLine();
+            Console.WriteLine("* 辞書登録プログラム *");           
             Console.WriteLine("**********************");
-            Console.WriteLine();
             #endregion
 
             // ディクショナリの初期化
