@@ -27,7 +27,7 @@
         <TextBox x:Name="tbTo" Grid.Row="1" Grid.Column="1" Margin="10"/>
         <TextBlock Grid.Row="2" Text="Cc:"
                    FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="4"/>
-        <TextBox x:Name="tbCc" Grid.Row="2" Grid.Column="1" Margin="10"/>
+        <TextBox x:Name="tbCc" Grid.Row="2" Grid.Column="1" Margin="10" TextChanged="tbCc_TextChanged"/>
         <TextBlock Grid.Row="3" Text="Bcc:"
                    FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="4"/>
         <TextBox x:Name="tbBcc" Grid.Row="3" Grid.Column="1" Margin="10"/>
