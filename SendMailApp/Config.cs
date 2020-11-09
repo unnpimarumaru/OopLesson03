@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace SendMailApp
 {
@@ -65,6 +67,22 @@ namespace SendMailApp
             this.Ssl = ssl;
             return true;
         }
-            
+
+        public void Serialise()
+        {
+            Config cf = instance;
+            using (var write = XmlWriter.Create("Config.Xml"))
+            {
+                var serializer = new XmlSerializer(instance.GetType());
+                serializer.Serialize(write, instance);
+
+            }
+        }
+
+        public void DeSerialise ()
+        {
+
+        }
+
     }
 }
