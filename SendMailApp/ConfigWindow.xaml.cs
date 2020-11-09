@@ -32,7 +32,7 @@ namespace SendMailApp
            // Config defaultData = cf.getDefaultStatus();
             tbSmtp.Text = cf.Smtp;
             tbPort.Text = cf.Port.ToString();
-            tbUserName.Text = cf.MailAddress;
+            tbUserName.Text = tbSender.Text = cf.MailAddress;
             tbPassWord.Password = cf.PassWord;
             cbSsl.IsChecked = cf.Ssl;
         }
@@ -62,7 +62,7 @@ namespace SendMailApp
             // Config defaultData = cf.getDefaultStatus();
             tbSmtp.Text = cf.Smtp;
             tbPort.Text = cf.Port.ToString();
-            tbUserName.Text = cf.MailAddress;
+            tbUserName.Text = tbSender.Text = cf.MailAddress;
             tbPassWord.Password = cf.PassWord;
             cbSsl.IsChecked = cf.Ssl;
         }
