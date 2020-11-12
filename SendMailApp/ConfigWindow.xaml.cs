@@ -36,11 +36,32 @@ namespace SendMailApp
             tbPassWord.Password = cf.PassWord;
             cbSsl.IsChecked = cf.Ssl;
         }
+        private  bool tbCheck()
+        {
+            if (tbUserName.Text == "" || tbPassWord.Password == "" || tbSmtp.Text == ""  
+               || tbSender.Text == ""|| tbPort.Text == "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         //適用（更新）
         private void btAppiy_Click(object sender, RoutedEventArgs e)
         {
-            (Config.GetInstance()).UpdateStatus(tbSmtp.Text, tbUserName.Text, tbPassWord.Password,
+            tbCheck();
+            {
+                MessageBox.Show("項目に空欄があります");
+            }
+            {
+                (Config.GetInstance()).UpdateStatus(tbSmtp.Text, tbUserName.Text, tbPassWord.Password,
                 int.Parse(tbPort.Text), cbSsl.IsChecked ?? false);//更新処理を呼び出す
+            }
+            
+            
            
 
         }
@@ -65,6 +86,8 @@ namespace SendMailApp
             tbUserName.Text = tbSender.Text = cf.MailAddress;
             tbPassWord.Password = cf.PassWord;
             cbSsl.IsChecked = cf.Ssl;
+
+
         }
 
         private void Window_Closed(object sender, EventArgs e)

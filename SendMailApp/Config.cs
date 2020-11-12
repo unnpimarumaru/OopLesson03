@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,19 +71,19 @@ namespace SendMailApp
 
         public void Serialise()
         {
-            Config cf = instance;
             using (var write = XmlWriter.Create("Config.Xml"))
             {
                 var serializer = new XmlSerializer(instance.GetType());
                 serializer.Serialize(write, instance);
-
             }
         }
 
         public void DeSerialise ()
         {
-
+            using (var reder = XmlReader.Create("Config.xml")) {
+                var serializer = new XmlSerializer(typeof(Config));
+                instance = serializer.Deserialize(reder) as Config;
+            }                 
         }
-
     }
 }
