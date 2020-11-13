@@ -52,18 +52,16 @@ namespace SendMailApp
         //適用（更新）
         private void btAppiy_Click(object sender, RoutedEventArgs e)
         {
-            tbCheck();
+            if(tbCheck())
             {
                 MessageBox.Show("項目に空欄があります");
             }
             {
-                (Config.GetInstance()).UpdateStatus(tbSmtp.Text, tbUserName.Text, tbPassWord.Password,
+                Config.GetInstance().UpdateStatus(tbSmtp.Text, tbUserName.Text, tbPassWord.Password,
                 int.Parse(tbPort.Text), cbSsl.IsChecked ?? false);//更新処理を呼び出す
+                cancel = false;
             }
             
-            
-           
-
         }
            //OKボタン
         private void btOK_Click(object sender, RoutedEventArgs e)
@@ -74,7 +72,14 @@ namespace SendMailApp
         //キャンセルボタン
         private void btcancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            if (cancel)
+            {
+                Savemessage();
+            }
+            else
+            {
+                this.Close();
+            }
         }
        　//ロード時に一度だけ呼び出される
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -93,6 +98,28 @@ namespace SendMailApp
         private void Window_Closed(object sender, EventArgs e)
         {
 
+        }
+
+        private void Savemessage()
+        {
+
+            MessageBoxResult result = MessageBox.Show("変更が反映されていません", "メッセージ", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
+            {
+                Close();
+            }
+        }
+        bool cancel = false; 
+
+
+        private void Tb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            cancel = true;
+        }
+
+        private void Tb_TextChanged(object sender, RoutedEventArgs e)
+        {
+            cancel = true;
         }
     }
 }
