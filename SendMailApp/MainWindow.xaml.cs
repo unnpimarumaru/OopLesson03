@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace SendMailApp
         {
             InitializeComponent();
             sc.SendCompleted += Sc_SendCompleted;
+            
         }
         //送信完了イベント
         private void Sc_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
@@ -60,6 +62,12 @@ namespace SendMailApp
                 msg.Subject = tbTitle.Text;//件名
                 msg.Body = tbBody.Text;//本文
 
+                foreach (var item in Lbox.Items)
+                {
+                    var attachments = new Attachment(item.ToString());
+                    msg.Attachments.Add(attachments);
+                }
+
                 
                 sc.Host = cf.Smtp;//SMTPサーバーの設定
                 sc.Port = cf.Port;
@@ -68,6 +76,10 @@ namespace SendMailApp
 
                // sc.Send(msg); //送信
                 sc.SendMailAsync(msg);
+
+               
+                
+
             }
             catch (Exception ex)
             {
@@ -126,6 +138,20 @@ namespace SendMailApp
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        
+        private void btAdd_Click(object sender, RoutedEventArgs e)
+        {
+            var fod = new OpenFileDialog();
+            if (fod.ShowDialog() == true)
+            {
+                Lbox.Items.Add(fod.FileName);
+            }
+        }
+
+        private void btDelete_Click(object sender, RoutedEventArgs e)
+        {
+            Lbox.Items.Clear();
         }
     }
 }
